@@ -1,0 +1,39 @@
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
+  align-items: center;
+}
+
+.players {
+  display: flex;
+  gap: 4rem;
+}
+
+.playerInfo {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  color: var(--white-color);
+}
+
+.playerInfoActive {
+  color: var(--success-bg-color);
+}
+
+.playerType {
+  font-size: 2rem;
+  font-family: 'Space Grotesk';
+  font-weight: 500;
+}
+
+.playerValue {
+  font-size: 1rem;
+  font-family: 'Space Grotesk';
+}

@@ -1,0 +1,25 @@
+.label {
+  flex: 1;
+  display: inline-block;
+  background-color: var(--dark-bg-secondary-color);
+  padding: 1rem 2rem;
+  border-radius: 0.2rem;
+
+  text-align: center;
+  text-wrap: nowrap;
+  font-size: 1.5rem;
+  color: var(--white-color);
+
+  -webkit-box-shadow: inset 1px 1px 1px rgb(123 122 122 / 14%);
+  -moz-box-shadow: inset 1px 1px 1px rgb(123 122 122 / 14%);
+  box-shadow: inset 1px 1px 1px rgb(123 122 122 / 14%);
+  filter: drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.6));
+}
+
+input {
+  display: none;
+}
+
+input:checked + .label {
+  background-color: var(--primary-bg-color);
+}

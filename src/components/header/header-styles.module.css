@@ -1,0 +1,10 @@
+.header {
+  display: flex;
+  padding: 1rem;
+  gap: 0.5rem;
+}
+
+.gearIcon {
+  font-size: 1.4rem;
+  color: var(--white-color);
+}

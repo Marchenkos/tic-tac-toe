@@ -1,0 +1,12 @@
+.board {
+  border-collapse: collapse;
+  color: var(--white-color);
+}
+
+.board tr:not(:last-child) {
+  border-bottom: 0.4rem solid currentColor;
+}
+
+.board tr td:not(:last-child) {
+  border-right: 0.4rem solid currentColor;
+}

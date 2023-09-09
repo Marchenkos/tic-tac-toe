@@ -1,0 +1,15 @@
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameName {
+  font-size: 4rem;
+  font-family: 'Space Grotesk';
+  font-weight: 700;
+  color: var(--white-color);
+}

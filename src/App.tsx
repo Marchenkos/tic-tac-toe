@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useState } from 'react';
+import styles from './App.module.css';
+import { HomeComponent } from './components/home/home.component';
+import { GameComponent } from './components/game/GameComponent';
+import { HeaderComponent } from './components/header/header.component';
+import { DialogUI } from './components/ui/dialog.ui';
 
 function App() {
+  const [isStarted, setIsStarted] = useState(false);
+
+  const stopGame = useCallback(() => {
+    setIsStarted(false);
+  }, []);
+
+  const startGame = useCallback(() => {
+    setIsStarted(true);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.wrapper}>
+      <HeaderComponent isGameStarted={isStarted} stopGame={stopGame} />
+
+      {isStarted ? <GameComponent /> : <HomeComponent startGame={startGame} />}
+
+      <DialogUI />
     </div>
   );
 }

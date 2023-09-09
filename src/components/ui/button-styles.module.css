@@ -1,0 +1,53 @@
+.button {
+  padding: 1em 2em;
+  border-radius: 2px;
+  border: none;
+  font-family: 'Space Grotesk';
+  cursor: pointer;
+
+  -webkit-box-shadow: 1px 0px 16px -8px rgba(71, 71, 71, 0.2);
+  -moz-box-shadow: 1px 0px 16px -8px rgba(71, 71, 71, 0.2);
+  box-shadow: 1px 0px 16px -8px rgba(71, 71, 71, 0.2);
+}
+
+.button-primary {
+  font-size: 1.6rem;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+  font-weight: 500;
+}
+
+.button:hover {
+  opacity: 0.95;
+}
+
+.button-secondary {
+  font-size: 1rem;
+  background-color: var(--dark-bg-secondary-color);
+}
+
+.button-transparent {
+  background-color: transparent;
+  padding: 0.4rem;
+  border-radius: 0px;
+}
+
+.button-error {
+  background-color: var(--dark-bg-secondary-color);
+  font-size: 1rem;
+  color: var(--primary-text-color);
+  font-weight: 500;  
+}
+
+.button-error:hover {
+  background-color: var(--error-bg-color);
+
+}
+
+.button-success {
+  font-size: 1.25rem;
+  background-color: var(--success-bg-color);
+  color: var(--primary-text-color);
+  font-weight: 500;
+  padding: 1rem;
+}
