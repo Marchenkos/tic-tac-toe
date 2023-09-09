@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { DialogContent } from "../components/ui/dialog.ui";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { DialogContent } from '../components/ui/dialog.ui';
 
 export interface DialogState {
   content?: DialogContent;
@@ -9,7 +9,7 @@ export interface DialogState {
 const initialState: DialogState = {
   content: undefined,
   active: false,
-}
+};
 
 export const dialogSlice = createSlice({
   name: 'dialog',
@@ -22,9 +22,9 @@ export const dialogSlice = createSlice({
     hideDialog: (state: DialogState) => {
       state.content = undefined;
       state.active = false;
-    }
-  }
-})
+    },
+  },
+});
 
-export const { showDialog, hideDialog } = dialogSlice.actions
+export const { showDialog, hideDialog } = dialogSlice.actions;
 export const dialogReducer = dialogSlice.reducer;

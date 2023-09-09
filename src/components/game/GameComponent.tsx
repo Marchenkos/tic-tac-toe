@@ -1,19 +1,24 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import classNames from "classnames";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
 
 import styles from './game-styles.module.css';
-import { emptyBoard, findWiner, isBoardFilled } from "../utils/board-utils";
-import { getBoardSizeSelector, getGameModeSelector, getFirstPlayerSelector, getSecondPlayerSelector } from "../../store/selectors/game-settings.selectors";
-import { BoardComponent } from "./BoardComponent";
-import { useAppDispatch, useAppSelector } from "../../store/store";
-import { FieldValue, resetWiner, updateWiner } from "../../store/game.slice";
-import { ButtonTypesEnum, ButtonUI } from "../ui/button.ui";
-import { GameMode } from "../../store/game-settings.slice";
-import { getCurrentValueSelector } from "../../store/selectors/game.selectors";
+import { emptyBoard, findWiner, isBoardFilled } from '../utils/board-utils';
+import {
+  getBoardSizeSelector,
+  getGameModeSelector,
+  getFirstPlayerSelector,
+  getSecondPlayerSelector,
+} from '../../store/selectors/game-settings.selectors';
+import { BoardComponent } from './BoardComponent';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { FieldValue, resetWiner, updateWiner } from '../../store/game.slice';
+import { ButtonTypesEnum, ButtonUI } from '../ui/button.ui';
+import { GameMode } from '../../store/game-settings.slice';
+import { getCurrentValueSelector } from '../../store/selectors/game.selectors';
 
 import victorySound from '../../assets/victory.mp3';
 import gameOverSound from '../../assets/game-over.mp3';
-import { useAudio } from "../../hooks/useAudio.hook";
+import { useAudio } from '../../hooks/useAudio.hook';
 
 export const GameComponent: React.FC = () => {
   const boardSize = useAppSelector(getBoardSizeSelector);
@@ -28,7 +33,7 @@ export const GameComponent: React.FC = () => {
 
   const boardRef = useRef<HTMLTableSectionElement>(null);
 
-  const [board, setBoard] = useState<FieldValue[][]>(emptyBoard(boardSize))
+  const [board, setBoard] = useState<FieldValue[][]>(emptyBoard(boardSize));
   const [gameOver, setGameOver] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -42,12 +47,12 @@ export const GameComponent: React.FC = () => {
   const botTurn = useCallback(() => {
     if (boardRef.current && !gameOver) {
       const childrens = boardRef.current.querySelectorAll(`[data-field-value=${FieldValue.NULL}]`);
-      
+
       if (childrens.length) {
         const step = Math.floor(Math.random() * childrens.length);
         setTimeout(() => {
           (childrens[step] as HTMLElement).click();
-        }, 200)
+        }, 200);
       }
     }
   }, [boardRef, gameOver]);
@@ -58,7 +63,6 @@ export const GameComponent: React.FC = () => {
     }
   }, [gameMode, botTurn, currentValue, secondPlayer]);
 
-
   useEffect(() => {
     resetGame();
   }, [gameMode, boardSize, resetGame]);
@@ -67,7 +71,7 @@ export const GameComponent: React.FC = () => {
     const winer = findWiner(board);
 
     if (winer) {
-      dispatch(updateWiner({ winer }))
+      dispatch(updateWiner({ winer }));
       setGameOver(true);
       victoryAudio.play();
     }
@@ -80,21 +84,33 @@ export const GameComponent: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <BoardComponent ref={boardRef} currentValue={currentValue} board={board} setBoard={setBoard} gameOver={gameOver} />
+      <BoardComponent
+        ref={boardRef}
+        currentValue={currentValue}
+        board={board}
+        setBoard={setBoard}
+        gameOver={gameOver}
+      />
 
       <div>
-        {gameOver ?
-          <ButtonUI style={ButtonTypesEnum.SUCCESS} label="New Game" handleClick={resetGame} />
-          : <div className={styles.players}>
-              {[firstPlayer, secondPlayer].map(player => 
-                <div key={player.type} className={classNames(styles.playerInfo, { [styles.playerInfoActive]: currentValue === player.fieldValue })}>
-                  <p className={styles.playerType}>{player.type}</p>
-                  <p className={styles.playerValue}>{player.fieldValue}</p>
-                </div>
-              )}
-            </div>
-        }
+        {gameOver ? (
+          <ButtonUI style={ButtonTypesEnum.SUCCESS} label='New Game' handleClick={resetGame} />
+        ) : (
+          <div className={styles.players}>
+            {[firstPlayer, secondPlayer].map((player) => (
+              <div
+                key={player.type}
+                className={classNames(styles.playerInfo, {
+                  [styles.playerInfoActive]: currentValue === player.fieldValue,
+                })}
+              >
+                <p className={styles.playerType}>{player.type}</p>
+                <p className={styles.playerValue}>{player.fieldValue}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};

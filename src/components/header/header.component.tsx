@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGear } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './header-styles.module.css';
 import { ButtonTypesEnum, ButtonUI } from '../ui/button.ui';
@@ -14,15 +14,18 @@ interface HaederComponentProps {
 }
 
 export const HeaderComponent: React.FC<HaederComponentProps> = memo(function HaederComponent({
-  isGameStarted, stopGame
+  isGameStarted,
+  stopGame,
 }) {
   const dispatch = useAppDispatch();
 
   const openConfigDialog = () => {
-    dispatch(showDialog({
-      content: DialogContent.CONFIG_BOARD,
-    }));
-  }
+    dispatch(
+      showDialog({
+        content: DialogContent.CONFIG_BOARD,
+      })
+    );
+  };
 
   return (
     <header className={styles.header}>

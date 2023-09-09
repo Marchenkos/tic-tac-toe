@@ -1,15 +1,15 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export enum FieldValue {
-  X = "X",
-  O = "O",
-  NULL = "null"
+  X = 'X',
+  O = 'O',
+  NULL = 'null',
 }
 
 export enum Direction {
   VERTICAL,
   HORIZONTAL,
-  DIAGONAL
+  DIAGONAL,
 }
 
 export interface Winer {
@@ -25,8 +25,8 @@ export interface GameState {
 
 const initialState: GameState = {
   winer: undefined,
-  currentValue: FieldValue.X
-}
+  currentValue: FieldValue.X,
+};
 
 export const gameSlice = createSlice({
   name: 'gameSettings',
@@ -36,13 +36,13 @@ export const gameSlice = createSlice({
       state.winer = action.payload.winer;
     },
     resetWiner: (state: GameState) => {
-      state.winer = undefined
+      state.winer = undefined;
     },
     updateCurrentValue: (state: GameState, action: PayloadAction<{ value: FieldValue.O | FieldValue.X }>) => {
       state.currentValue = action.payload.value;
     },
-  }
-})
+  },
+});
 
-export const { updateWiner, resetWiner, updateCurrentValue } = gameSlice.actions
+export const { updateWiner, resetWiner, updateCurrentValue } = gameSlice.actions;
 export const gameReducer = gameSlice.reducer;

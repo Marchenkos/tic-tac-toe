@@ -1,15 +1,15 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { FieldValue } from "./game.slice";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { FieldValue } from './game.slice';
 
 export enum GameMode {
   BOT = 'bot',
-  PLAYER = 'player'
+  PLAYER = 'player',
 }
 
 export enum PlayerType {
   BOT = 'bot',
   FRIEND = 'friend',
-  YOU = 'you'
+  YOU = 'you',
 }
 
 export interface Player {
@@ -31,13 +31,13 @@ const initialState: GameSettingsState = {
   gameMode: GameMode.BOT,
   firstPlayer: {
     type: PlayerType.YOU,
-    fieldValue: FieldValue.X
+    fieldValue: FieldValue.X,
   },
   secondPlayer: {
     type: PlayerType.BOT,
-    fieldValue: FieldValue.O
-  }
-}
+    fieldValue: FieldValue.O,
+  },
+};
 interface UpdateSettingsPayload {
   gameMode: GameMode;
   boardSize: number;
@@ -54,13 +54,13 @@ export const gameSettingsSlice = createSlice({
       state.audio = action.payload.audio;
 
       if (action.payload.gameMode === GameMode.BOT) {
-        state.secondPlayer = { ...state.secondPlayer, type: PlayerType.BOT }
+        state.secondPlayer = { ...state.secondPlayer, type: PlayerType.BOT };
       } else {
-        state.secondPlayer = { ...state.secondPlayer, type: PlayerType.FRIEND }
+        state.secondPlayer = { ...state.secondPlayer, type: PlayerType.FRIEND };
       }
-    }
-  }
-})
+    },
+  },
+});
 
-export const { updateSettings } = gameSettingsSlice.actions
+export const { updateSettings } = gameSettingsSlice.actions;
 export const gameSettingsReducer = gameSettingsSlice.reducer;

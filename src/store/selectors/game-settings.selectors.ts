@@ -1,6 +1,6 @@
-import { createSelector, Selector } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-import { GameMode, GameSettingsState, Player } from "../game-settings.slice";
+import { createSelector, Selector } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+import { GameMode, GameSettingsState, Player } from '../game-settings.slice';
 
 export const getGameSettingsSelector: Selector<RootState, GameSettingsState> = createSelector(
   (state: RootState) => state.gameSettings,

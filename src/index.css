@@ -5,13 +5,28 @@
 body {
   margin: 0;
   font-family: 'Space Grotesk';
-  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   overflow-y: hidden;
 }
 
+html {
+  font-size: 16px;
+}
+
 #root {
   height: 100%;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  html {
+    font-size: 12px;
+  }
 }

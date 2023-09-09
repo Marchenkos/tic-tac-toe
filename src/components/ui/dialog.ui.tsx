@@ -1,31 +1,31 @@
-import { ReactElement, memo, useCallback, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { ReactElement, memo, useCallback, useEffect, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './dialog-styles.module.css';
-import { getDialogSelector } from "../../store/selectors/dialog.selectors";
-import { hideDialog } from "../../store/dialog.slice";
-import { ButtonTypesEnum, ButtonUI } from "./button.ui";
-import { ConfidGame } from "../modals/config-game.component";
-import { useAppDispatch, useAppSelector } from "../../store/store";
+import { getDialogSelector } from '../../store/selectors/dialog.selectors';
+import { hideDialog } from '../../store/dialog.slice';
+import { ButtonTypesEnum, ButtonUI } from './button.ui';
+import { ConfidGame } from '../modals/config-game.component';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 
 export enum DialogContent {
   CONFIG_BOARD = 1,
 }
 
 const modals: { [key in DialogContent]: ReactElement } = {
-  [DialogContent.CONFIG_BOARD]: <ConfidGame />
-}
+  [DialogContent.CONFIG_BOARD]: <ConfidGame />,
+};
 
-export const DialogUI: React.FC = memo(function DialogUI () {
+export const DialogUI: React.FC = memo(function DialogUI() {
   const { active, content } = useAppSelector(getDialogSelector);
-  const dialogRef = useRef<HTMLDialogElement>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const dispatch = useAppDispatch();
 
   const closeDialog = useCallback(() => {
     dispatch(hideDialog());
-  }, [dispatch])
+  }, [dispatch]);
 
   useEffect(() => {
     if (dialogRef.current && active) {
@@ -35,7 +35,7 @@ export const DialogUI: React.FC = memo(function DialogUI () {
         dialogRef.current.close();
       }
     }
-  }, [dialogRef, active])
+  }, [dialogRef, active]);
 
   if (!content) {
     return null;
@@ -49,9 +49,7 @@ export const DialogUI: React.FC = memo(function DialogUI () {
           <FontAwesomeIcon className={styles.closeIcon} icon={faXmark} />
         </ButtonUI>
       </div>
-      <div className={styles.content}>
-        {modals[content]}
-      </div>
+      <div className={styles.content}>{modals[content]}</div>
     </dialog>
-  )
+  );
 });

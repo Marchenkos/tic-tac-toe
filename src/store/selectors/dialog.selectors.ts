@@ -1,7 +1,7 @@
-import { createSelector, Selector } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-import { DialogState } from "../dialog.slice";
-import { DialogContent } from "../../components/ui/dialog.ui";
+import { createSelector, Selector } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+import { DialogState } from '../dialog.slice';
+import { DialogContent } from '../../components/ui/dialog.ui';
 
 export const getDialogSelector: Selector<RootState, DialogState> = createSelector(
   (state: RootState) => state.dialog,

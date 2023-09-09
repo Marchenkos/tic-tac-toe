@@ -5,7 +5,11 @@ import { RadioButtonUI } from '../ui/radio-button.ui';
 import { ButtonTypesEnum, ButtonUI } from '../ui/button.ui';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { GameMode, updateSettings } from '../../store/game-settings.slice';
-import { getBoardSizeSelector, getGameModeSelector, getIsAudioTurnOn } from '../../store/selectors/game-settings.selectors';
+import {
+  getBoardSizeSelector,
+  getGameModeSelector,
+  getIsAudioTurnOn,
+} from '../../store/selectors/game-settings.selectors';
 import { hideDialog } from '../../store/dialog.slice';
 
 export const ConfidGame: React.FC = memo(function ConfidGame() {
@@ -33,11 +37,13 @@ export const ConfidGame: React.FC = memo(function ConfidGame() {
   const applyChanges = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(updateSettings({
-      boardSize,
-      gameMode,
-      audio
-    }));
+    dispatch(
+      updateSettings({
+        boardSize,
+        gameMode,
+        audio,
+      })
+    );
 
     dispatch(hideDialog());
   };
@@ -47,16 +53,40 @@ export const ConfidGame: React.FC = memo(function ConfidGame() {
       <div>
         <h2 className={styles.optionsTitle}>Board Size</h2>
         <div className={styles.radioButtonsWrapper}>
-          <RadioButtonUI name='boardSize' label='3' value='3' checked={boardSize === 3} handleChange={updateBoardSize} />
-          <RadioButtonUI name='boardSize' label='5' value='5' checked={boardSize === 5} handleChange={updateBoardSize} />
+          <RadioButtonUI
+            name='boardSize'
+            label='3'
+            value='3'
+            checked={boardSize === 3}
+            handleChange={updateBoardSize}
+          />
+          <RadioButtonUI
+            name='boardSize'
+            label='5'
+            value='5'
+            checked={boardSize === 5}
+            handleChange={updateBoardSize}
+          />
         </div>
       </div>
 
       <div>
         <h2 className={styles.optionsTitle}>Game Mode</h2>
         <div className={styles.radioButtonsWrapper}>
-          <RadioButtonUI name='gameMode' label='With Bot' value={GameMode.BOT} checked={gameMode === GameMode.BOT} handleChange={updateGameMode} />
-          <RadioButtonUI name='gameMode' label='With Friend' value={GameMode.PLAYER} checked={gameMode === GameMode.PLAYER} handleChange={updateGameMode} />
+          <RadioButtonUI
+            name='gameMode'
+            label='With Bot'
+            value={GameMode.BOT}
+            checked={gameMode === GameMode.BOT}
+            handleChange={updateGameMode}
+          />
+          <RadioButtonUI
+            name='gameMode'
+            label='With Friend'
+            value={GameMode.PLAYER}
+            checked={gameMode === GameMode.PLAYER}
+            handleChange={updateGameMode}
+          />
         </div>
       </div>
 
@@ -68,8 +98,7 @@ export const ConfidGame: React.FC = memo(function ConfidGame() {
         </div>
       </div>
 
-      <ButtonUI type="submit" label='Apply' style={ButtonTypesEnum.SUCCESS} />
+      <ButtonUI type='submit' label='Apply' style={ButtonTypesEnum.SUCCESS} />
     </form>
   );
 });
-
