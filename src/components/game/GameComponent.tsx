@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import classNames from "classnames";
 
 import styles from './game-styles.module.css';
 import { emptyBoard, findWiner, isBoardFilled } from "../utils/board-utils";
@@ -9,7 +10,6 @@ import { FieldValue, resetWiner, updateWiner } from "../../store/game.slice";
 import { ButtonTypesEnum, ButtonUI } from "../ui/button.ui";
 import { GameMode } from "../../store/game-settings.slice";
 import { getCurrentValueSelector } from "../../store/selectors/game.selectors";
-import classNames from "classnames";
 
 export const GameComponent: React.FC = () => {
   const boardSize = useAppSelector(getBoardSizeSelector);

@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
-import { FieldComponent } from "./FieldComponent";
-
-import styles from './board-styles.module.css';
 import classNames from "classnames";
+
+import { FieldComponent } from "./FieldComponent";
+import styles from './board-styles.module.css';
 
 import { FieldValue, updateCurrentValue } from "../../store/game.slice";
 import { useAppDispatch } from "../../store/store";

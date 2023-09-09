@@ -34,4 +34,3 @@ export const HeaderComponent: React.FC<HaederComponentProps> = memo(function Hae
     </header>
   );
 });
-

@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+
 import styles from './App.module.css';
 import { HomeComponent } from './components/home/home.component';
 import { GameComponent } from './components/game/GameComponent';
