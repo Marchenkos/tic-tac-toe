@@ -10,3 +10,23 @@
 .board tr td:not(:last-child) {
   border-right: 0.4rem solid currentColor;
 }
+
+
+.gameOver tr {
+  animation: border-blink .3s steps(1) 3
+}
+
+.gameOver td {
+  animation: border-blink .3s steps(1) 3;
+  opacity: 0.4;
+}
+
+@keyframes border-blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.wrapper {
+ 
+}

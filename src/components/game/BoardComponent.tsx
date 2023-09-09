@@ -5,7 +5,11 @@ import { FieldComponent } from "./FieldComponent";
 import styles from './board-styles.module.css';
 
 import { FieldValue, updateCurrentValue } from "../../store/game.slice";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+
+import clickSound from '../../assets/click.mp3';
+import { getWinerSelector } from "../../store/selectors/game.selectors";
+import { useAudio } from "../../hooks/useAudio.hook";
 
 interface BoardComponentProps {
   board: FieldValue[][];
@@ -18,6 +22,9 @@ export const BoardComponent = forwardRef<HTMLTableSectionElement | null, BoardCo
   props: BoardComponentProps, ref
 ) {
   const { board, setBoard, gameOver, currentValue } = props;
+  const winer = useAppSelector(getWinerSelector);
+  const clickAudio = useAudio(clickSound, {});
+
   const dispatch = useAppDispatch();
 
   const setFieldValue = (rowID: number, columnID: number) => {
@@ -27,6 +34,8 @@ export const BoardComponent = forwardRef<HTMLTableSectionElement | null, BoardCo
           columnIndex === columnID ? currentValue : val) : row
       ));
 
+      clickAudio.play();
+
       dispatch(updateCurrentValue({
         value: currentValue === FieldValue.O ? FieldValue.X : FieldValue.O
       }))
@@ -35,7 +44,7 @@ export const BoardComponent = forwardRef<HTMLTableSectionElement | null, BoardCo
 
   return (
     <div className={styles.wrapper}>
-      <table className={classNames(styles.board)}>
+      <table className={classNames(styles.board, {[styles.gameOver]: !winer && gameOver })}>
         <tbody ref={ref}>
           {board.map((row, rowIndex) => 
             <tr key={`row_${rowIndex}`}>

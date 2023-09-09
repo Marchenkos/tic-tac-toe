@@ -26,3 +26,8 @@ export const getFirstPlayerSelector: Selector<RootState, Player> = createSelecto
   getGameSettingsSelector,
   (gameSettings) => gameSettings.firstPlayer
 );
+
+export const getIsAudioTurnOn: Selector<RootState, boolean> = createSelector(
+  getGameSettingsSelector,
+  (gameSettings) => gameSettings.audio
+);

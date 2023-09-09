@@ -22,10 +22,12 @@ export interface GameSettingsState {
   gameMode: GameMode;
   firstPlayer: Player;
   secondPlayer: Player;
+  audio: boolean;
 }
 
 const initialState: GameSettingsState = {
   boardSize: 3,
+  audio: true,
   gameMode: GameMode.BOT,
   firstPlayer: {
     type: PlayerType.YOU,
@@ -36,14 +38,20 @@ const initialState: GameSettingsState = {
     fieldValue: FieldValue.O
   }
 }
+interface UpdateSettingsPayload {
+  gameMode: GameMode;
+  boardSize: number;
+  audio: boolean;
+}
 
 export const gameSettingsSlice = createSlice({
   name: 'gameSettings',
   initialState,
   reducers: {
-    updateSettings: (state: GameSettingsState, action: PayloadAction<{ gameMode: GameMode, boardSize: number }>) => {
+    updateSettings: (state: GameSettingsState, action: PayloadAction<UpdateSettingsPayload>) => {
       state.boardSize = action.payload.boardSize;
       state.gameMode = action.payload.gameMode;
+      state.audio = action.payload.audio;
 
       if (action.payload.gameMode === GameMode.BOT) {
         state.secondPlayer = { ...state.secondPlayer, type: PlayerType.BOT }

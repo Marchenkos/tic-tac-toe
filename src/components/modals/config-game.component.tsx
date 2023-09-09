@@ -5,15 +5,18 @@ import { RadioButtonUI } from '../ui/radio-button.ui';
 import { ButtonTypesEnum, ButtonUI } from '../ui/button.ui';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { GameMode, updateSettings } from '../../store/game-settings.slice';
-import { getBoardSizeSelector, getGameModeSelector } from '../../store/selectors/game-settings.selectors';
+import { getBoardSizeSelector, getGameModeSelector, getIsAudioTurnOn } from '../../store/selectors/game-settings.selectors';
 import { hideDialog } from '../../store/dialog.slice';
 
 export const ConfidGame: React.FC = memo(function ConfidGame() {
   const dispatch = useAppDispatch();
   const currentGameMode = useAppSelector(getGameModeSelector);
   const currentBoardSize = useAppSelector(getBoardSizeSelector);
+  const currentAudio = useAppSelector(getIsAudioTurnOn);
+
   const [gameMode, setGameMode] = useState<GameMode>(currentGameMode);
   const [boardSize, setBoardSize] = useState<number>(currentBoardSize);
+  const [audio, setAudio] = useState<boolean>(currentAudio);
 
   const updateGameMode = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setGameMode(e.target.value as GameMode);
@@ -23,12 +26,17 @@ export const ConfidGame: React.FC = memo(function ConfidGame() {
     setBoardSize(parseInt(e.target.value));
   }, []);
 
+  const updateAudio = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setAudio(!!parseInt(e.target.value));
+  }, []);
+
   const applyChanges = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     dispatch(updateSettings({
       boardSize,
-      gameMode
+      gameMode,
+      audio
     }));
 
     dispatch(hideDialog());
@@ -49,6 +57,14 @@ export const ConfidGame: React.FC = memo(function ConfidGame() {
         <div className={styles.radioButtonsWrapper}>
           <RadioButtonUI name='gameMode' label='With Bot' value={GameMode.BOT} checked={gameMode === GameMode.BOT} handleChange={updateGameMode} />
           <RadioButtonUI name='gameMode' label='With Friend' value={GameMode.PLAYER} checked={gameMode === GameMode.PLAYER} handleChange={updateGameMode} />
+        </div>
+      </div>
+
+      <div>
+        <h2 className={styles.optionsTitle}>Audio</h2>
+        <div className={styles.radioButtonsWrapper}>
+          <RadioButtonUI name='audio' label='On' value={'1'} checked={audio} handleChange={updateAudio} />
+          <RadioButtonUI name='audio' label='Off' value={'0'} checked={!audio} handleChange={updateAudio} />
         </div>
       </div>
 
