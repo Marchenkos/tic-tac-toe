@@ -52,7 +52,7 @@ export const GameComponent: React.FC = () => {
         const step = Math.floor(Math.random() * childrens.length);
         setTimeout(() => {
           (childrens[step] as HTMLElement).click();
-        }, 200);
+        }, 400);
       }
     }
   }, [boardRef, gameOver]);

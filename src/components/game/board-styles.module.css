@@ -11,6 +11,7 @@
   border-right: 0.4rem solid currentColor;
 }
 
+
 .gameOver tr {
   animation: border-blink 0.3s steps(1) 3;
 }

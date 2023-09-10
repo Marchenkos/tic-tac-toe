@@ -5,8 +5,9 @@
   color: var(--white-color);
   width: 8rem;
   height: 8rem;
-  font-size: 4rem;
-  font-family: 'Space Grotesk';
+  font-size: 5rem;
+  font-family: 'Mali';
+  font-weight: 600;
   animation: appear 0.2s cubic-bezier(0.5, 1.8, 0.1, 1.1);
 }
 
